@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alas y Cielo - Promoción de Vuelos</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      font-family: 'Verdana', sans-serif;
+      background: radial-gradient(circle at top, #b2ebf2, #81d4fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .oferta {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #e53935;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: bold;
+      font-size: 0.85rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: transform 0.2s ease;
+    }
+
+    .oferta:hover {
+      transform: scale(1.1);
+    }
+
+    .contenedor {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 2rem;
+      border-radius: 20px;
+      text-align: center;
+      width: 90%;
+      max-width: 380px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      z-index: 5;
+    }
+
+    .contenedor h2 {
+      font-size: 1.3rem;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .contenedor h1 {
+      font-size: 1.8rem;
+      color: #444;
+      margin-bottom: 1rem;
+    }
+
+    .precio {
+      font-size: 3.5rem;
+      color: #d32f2f;
+      font-weight: bold;
+      animation: pop 1.8s infinite;
+    }
+
+    .trayecto {
+      font-size: 1rem;
+      color: #666;
+      margin-top: 0.3rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .boton-compra {
+      margin-top: 2rem;
+      padding: 1rem;
+      width: 100%;
+      border: none;
+      background-color: #1976d2;
+      color: white;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .boton-compra:hover {
+      background-color: #0d47a1;
+    }
+
+    @keyframes pop {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.07); }
+    }
+
+    canvas#canvas-confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @media (max-width: 480px) {
+      .contenedor {
+        padding: 1.5rem;
+      }
+
+      .precio {
+        font-size: 2.5rem;
+      }
+
+      .boton-compra {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="oferta" onclick="dispararConfetti()">¡MEGA OFERTA!</div>
+
+  <div class="contenedor">
+    <h2>¡DESCUBRE NUEVOS DESTINOS!</h2>
+    <h1>VUELOS NACIONALES DESDE</h1>
+    <div class="precio">$49.900</div>
+    <div class="trayecto">por trayecto</div>
+    <button class="boton-compra" onclick="window.location.href=''">
+      ¡COMPRA AHORA!
+    </button>
+  </div>
+
+  <canvas id="canvas-confetti"></canvas>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+  <script>
+    const canvas = document.getElementById('canvas-confetti');
+    const confettiInstance = confetti.create(canvas, { resize: true, useWorker: true });
+
+    function dispararConfetti() {
+      confettiInstance({
+        particleCount: 180,
+        spread: 80,
+        origin: { y: 0.6 }
+      });
+    }
+
+    // Activar confetti al cargar
+    window.addEventListener('load', dispararConfetti);
+  </script>
+
+</body>
+</html>
